@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration</title>
+<style>
+    body{ font-family: Arial;
+        background-attachment: fixed;}
+    .box{
+        width:100px;
+        margin:700px ;
+        background: pink;
+        padding: 10px;
+
+    }
+    input, select{width:350%;
+                  padding:8px;
+                  margin: 5px 0;
+    }
+    button{
+        padding:10px;
+        width:48%;
+    }
+    .success{color:greenyellow;
+    display:none;
+    }
+
+</style>
+</head>
+    <body>
+        <div class=" box">
+    <h2>Registration Form</h2>
+
+    <form id="form">
+      <b> Full Name:</b><br><input type="text" id = "name" required><br><br>
+
+      <b> Email:</b><br><input type="email" id = "email" required><br><br>
+
+      <b> Password:</b><br><input type="password" id = "pass" required><br><br>
+
+      <b> Confirm Password:</b><br><input type="password" id = "cpass" onkeyup="checkPass()"><br><p id="msg"></p>
+
+      <b> Age:</b><br><input type="number" id = "age"><br><br>
+
+      <b> Gender:</b><br><input type="radio" name="g" value="Male">Male 
+                 <input type="radio" name="g" value="Female">Female 
+                 <input type="radio" name="g" value="Other">Other <br><br>
+
+      <b> Country:</b><br><select id="country"><option>Philippines</option><option>United State America</option><option>China</option></select><br><br>
+     <input type="checkbox" id="terms"> I agree <br><br>
+    
+    </form>
+    </div>
+
+</body>
+</html>
+
