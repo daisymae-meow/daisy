@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quizzes</title>
+
+<style>
+
+body {
+    margin: 0;
+    font-family: "Times New Roman", Times, serif;
+    background-image: url('background.jpg');
+    background-size: cover;
+}
+
+/* NAVBAR */
+.navbar {
+    background: rgba(254, 235, 231, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    margin: 0 25px;
+    font-size: 28px;
+    position: relative;
+    transition: 0.3s ease;
+}
+
+.navbar a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 3px;
+    left: 0;
+    bottom: -5px;
+    background: linear-gradient(90deg, #f7d2f7, #e4c7ed);
+    transition: 0.3s ease;
+    border-radius: 10px;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+/* MAIN CARD */
+.card {
+    max-width: 1200px;
+    margin: 50px auto;
+    background-color: #E4C7ED;
+    border-radius: 25px;
+    padding: 50px;
+}
+
+/* HEADER */
+.card-header {
+    text-align: center;
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    background-color: #F7D2F7;
+    border-radius: 30px;
+    padding: 15px;
+}
+
+/* LAYOUT */
+.top-section {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+/* SUBMIT BOX */
+.submit-box {
+    width: 300px;
+    background: #FEEBE7;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+/* QUIZ BOX */
+.quiz-box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.quiz-card {
+    width: 300px;
+    background: #FEEBE7;
+    padding: 28px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.quiz-card:hover {
+    transform: scale(1.05);
+    background-color: #F7D2F7;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    width: 450px;
+    background: #FEEBE7;
+    padding: 20px;
+    border-radius: 15px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.modal-content img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+
+button {
+    padding: 14px;
+    width: 100%;
+    background: linear-gradient(135deg, #F7D2F7, #E4C7ED);
+    border: none;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #E4C7ED, #F7D2F7);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* BACK */
+.back-container {
+    text-align: center;
+    margin-top: 40px;
+}
+.back {
+    display: inline-block;
+    margin-top: 50px;
+    padding: 12px 25px;
+    background-color: #FEEBE7;
+    border: 2px solid #E4C7ED;
+    border-radius: 25px;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transition: 0.3s ease;
+}
+
+/* BACK HOVER */
+.back:hover {
+    background-color: #F7D2F7;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* CENTER BACK BUTTON */
+.back-container {
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="Activities.html">Activities</a>
+    <a href="Quizzes.html">Quizzes</a>
+    <a href="Examinations.html">Examinations</a>
+    <a href="MyPortfolio.html">Profile</a>
+</div>
+
+<!-- MAIN CARD -->
+<div class="card">
+
+    <div class="card-header">📝 Quizzes</div>
+
+    <div class="top-section">
+
+        <div class="submit-box">
+            <h2>Submit Quiz</h2>
+            <input type="file" id="fileUpload">
+            <button id="submitBtn" disabled onclick="submitFile()">Submit</button>
+        </div>
+
+        <div class="quiz-box">
+
+            <div class="quiz-card" onclick="openQuiz('quiz1.jpg')">Quiz 1</div>
+            <div class="quiz-card" onclick="openQuiz('quiz2.jpg')">Quiz 2</div>
+            <div class="quiz-card" onclick="openQuiz('quiz3.jpg')">Quiz 3</div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- POPUP -->
+<div class="modal" id="quizModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeQuiz()">✖</span>
+        <img id="quizImage">
+    </div>
+</div>
+
+<!-- BACK -->
+<div class="back-container">
+    <a class="back" href="MyPortfolio.html">← Back</a>
+</div>
+
+<script>
+
+function openQuiz(image){
+    document.getElementById("quizModal").style.display="flex";
+    document.getElementById("quizImage").src=image;
+}
+
+function closeQuiz(){
+    document.getElementById("quizModal").style.display="none";
+}
+
+document.getElementById("fileUpload").addEventListener("change", function(){
+    document.getElementById("submitBtn").disabled = this.files.length === 0;
+});
+
+function submitFile(){
+    alert("Submitted!");
+}
+
+</script>
+
+</body>
+</html>
