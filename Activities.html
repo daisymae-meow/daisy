@@ -6,6 +6,7 @@
 
 <style>
 
+/* BODY */
 body {
     margin: 0;
     font-family: "Times New Roman", Times, serif;
@@ -15,13 +16,14 @@ body {
 
 /* NAVBAR */
 .navbar {
-    background: rgba(254, 235, 231, 0.75);
+    background: rgba(254, 235, 231, 0.7);
     backdrop-filter: blur(10px);
     padding: 15px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
+    z-index: 1000;
 }
 
 .navbar a {
@@ -30,9 +32,27 @@ body {
     font-weight: bold;
     margin: 0 25px;
     font-size: 28px;
+    position: relative;
+    transition: 0.3s ease;
 }
 
-/* MAIN CARD */
+.navbar a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 3px;
+    left: 0;
+    bottom: -5px;
+    background: linear-gradient(90deg, #f7d2f7, #e4c7ed);
+    transition: 0.3s ease;
+    border-radius: 10px;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+/* MAIN CARD (PROFILE STYLE) */
 .card {
     max-width: 1200px;
     margin: 50px auto;
@@ -53,7 +73,7 @@ body {
     padding: 15px;
 }
 
-/* LAYOUT */
+/* LAYOUT (PROFILE STYLE FLEX) */
 .top-section {
     display: flex;
     justify-content: center;
@@ -62,7 +82,7 @@ body {
     align-items: flex-start;
 }
 
-/* LEFT SIDE */
+/* LEFT ACTIVITIES */
 .activity-box {
     display: flex;
     flex-direction: column;
@@ -88,7 +108,7 @@ body {
     background-color: #F7D2F7;
 }
 
-/* RIGHT BOX */
+/* RIGHT INFO BOX */
 .info-box {
     width: 320px;
     background: #FEEBE7;
@@ -97,7 +117,42 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* ================= POPUPS (UNCHANGED) ================= */
+/* ================= SUBMIT FILE BOX (EXAM STYLE) ================= */
+
+.submit-box {
+    width: 320px;
+    background: #FEEBE7;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.submit-box h2 {
+    margin-bottom: 15px;
+}
+
+/* BUTTON STYLE (EXAM STYLE) */
+#submitBtn {
+    padding: 12px;
+    width: 100%;
+    background-color: #D99D54;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#submitBtn:hover {
+    background-color: pink;
+}
+
+#submitBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* ================= MODAL ================= */
 
 .modal {
     display: none;
@@ -127,11 +182,6 @@ body {
     cursor: pointer;
 }
 
-img {
-    width: 100%;
-    border-radius: 10px;
-}
-
 /* FORM INPUT */
 input, select {
     width: 90%;
@@ -141,15 +191,14 @@ input, select {
 
 /* REGISTER BUTTON (UNCHANGED) */
 button[type="submit"] {
-    padding: 12px;
+    padding: 10px;
     width: 48%;
-    background: linear-gradient(135deg, #F7D2F7, #E4C7ED);
+    background-color: #D99D54;
     border: none;
-    border-radius: 15px;
+    border-radius: 8px;
     cursor: pointer;
 }
 
-/* CLEAR BUTTON */
 button[type="reset"] {
     padding: 10px;
     width: 48%;
@@ -159,44 +208,20 @@ button[type="reset"] {
     cursor: pointer;
 }
 
-.file-submit-box {
-    width: 300px;
-    background: #FEEBE7;
-    border-radius: 20px;
-    padding: 25px;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+.success {
+    color: green;
+    display: none;
 }
 
-.file-submit-box h2 {
-    margin-bottom: 15px;
-}
-
-/* ACTIVITY STYLE BUTTON */
-#submitBtn {
-    padding: 10px;
+/* IMAGE */
+img {
     width: 100%;
-    background-color: #D99D54;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
+    border-radius: 10px;
 }
-
-#submitBtn:hover {
-    background-color: pink;
-}
-
-#submitBtn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-/* BACK */
 .back-container {
     text-align: center;
+    margin-top: 40px;
 }
-
 .back {
     display: inline-block;
     margin-top: 50px;
@@ -208,18 +233,24 @@ button[type="reset"] {
     text-decoration: none;
     color: black;
     box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transition: 0.3s ease;
 }
 
 .back:hover {
     background-color: #F7D2F7;
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
+.back-container {
+    text-align: center;
+}
 </style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <div class="navbar">
     <a href="Activities.html">Activities</a>
     <a href="Quizzes.html">Quizzes</a>
@@ -227,6 +258,7 @@ button[type="reset"] {
     <a href="index.html">Profile</a>
 </div>
 
+<!-- MAIN CARD -->
 <div class="card">
 
     <div class="card-header">📚 Activities</div>
@@ -237,7 +269,7 @@ button[type="reset"] {
         <div class="activity-box">
 
             <div class="card-item" onclick="openActivity1()">
-                Activity 1<br><small>Carousel</small>
+                Activity 1<br><small>HTML Structure</small>
             </div>
 
             <div class="card-item" onclick="openForm()">
@@ -246,14 +278,14 @@ button[type="reset"] {
 
         </div>
 
-        <!-- RIGHT -->
+        <!-- RIGHT INFO -->
         <div class="info-box">
             <h2>📌 Activities</h2>
-            <p>Click each activity to view output or open the form.</p>
+            <p>Click each activity to view output or open form.</p>
         </div>
 
-        <!-- ✅ ADDED FILE SUBMIT BOX -->
-        <div class="file-submit-box">
+        <!-- ✅ SUBMIT FILE (EXAM STYLE) -->
+        <div class="submit-box">
             <h2>Submit File</h2>
             <input type="file" id="fileUpload">
             <button id="submitBtn" disabled onclick="submitFile()">Submit</button>
@@ -280,18 +312,17 @@ button[type="reset"] {
         <h2>Registration Form</h2>
 
         <form id="form">
-            <input type="text" placeholder="Full Name" required><br>
-            <input type="email" placeholder="Email" required><br>
-
-            <input type="password" id="pass"><br>
-            <input type="password" id="cpass"><br>
+            <input type="text" required>
+            <input type="email" required>
+            <input type="password" id="pass">
+            <input type="password" id="cpass">
 
             <p id="msg"></p>
 
             <select>
                 <option>Philippines</option>
                 <option>USA</option>
-            </select><br><br>
+            </select>
 
             <input type="checkbox" id="terms"> I agree<br><br>
 
@@ -304,29 +335,21 @@ button[type="reset"] {
     </div>
 </div>
 
+<!-- BACK -->
 <div class="back-container">
     <a class="back" href="index.html">← Back</a>
 </div>
 
 <script>
 
-function openActivity1(){
-    document.getElementById("modal1").style.display="flex";
-}
+/* POPUPS */
+function openActivity1(){ document.getElementById("modal1").style.display="flex"; }
+function closeActivity1(){ document.getElementById("modal1").style.display="none"; }
 
-function closeActivity1(){
-    document.getElementById("modal1").style.display="none";
-}
+function openForm(){ document.getElementById("modal2").style.display="flex"; }
+function closeForm(){ document.getElementById("modal2").style.display="none"; }
 
-function openForm(){
-    document.getElementById("modal2").style.display="flex";
-}
-
-function closeForm(){
-    document.getElementById("modal2").style.display="none";
-}
-
-/* file submit */
+/* FILE SUBMIT */
 document.getElementById("fileUpload").addEventListener("change", function(){
     document.getElementById("submitBtn").disabled = this.files.length === 0;
 });
@@ -334,6 +357,21 @@ document.getElementById("fileUpload").addEventListener("change", function(){
 function submitFile(){
     alert("File submitted!");
 }
+
+/* PASSWORD CHECK */
+let pass = document.getElementById("pass");
+let cpass = document.getElementById("cpass");
+let msg = document.getElementById("msg");
+
+document.addEventListener("input", function () {
+    if (pass.value === cpass.value) {
+        msg.innerHTML = "Passwords match";
+        msg.style.color = "green";
+    } else {
+        msg.innerHTML = "Passwords not match";
+        msg.style.color = "red";
+    }
+});
 
 </script>
 
